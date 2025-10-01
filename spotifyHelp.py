@@ -1,7 +1,11 @@
 import tekore as tk
 import os
+from dotenv import load_dotenv
 
 def authorize():
+    # Load .env only if running locally
+    if os.getenv('GITHUB_ACTIONS') != 'true':
+        load_dotenv()
     client_id = os.getenv('SPOTIFY_CLIENT_ID')
     client_secret = os.getenv('SPOTIFY_SECRET')
     redirect_uri = os.getenv('SPOTIFY_REDIRECT')

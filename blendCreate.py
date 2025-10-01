@@ -3,13 +3,13 @@ import random
 
 from spotifyHelp import authorize, getPlaylistTracks
 
-def autoGeneratePlaylist(destID, sourceIds, numSongsEach = 40):
+def autoGenerateBlend(destID, sourceIds, numSongsEach = 50):
 
     spotify = authorize()
 
     sources = []
     for sourceId in sourceIds:
-        sources.append(getPlaylistTracks(sourceId))
+        sources.append(getPlaylistTracks(spotify, sourceId))
 
     allSongs = [(song.track.uri,i) for i, source in enumerate(sources) for song in source]
     random.shuffle(allSongs)
