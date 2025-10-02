@@ -1,0 +1,23 @@
+name: Daily Blend Creation Job
+
+on:
+  schedule:
+    - cron: '0 11 * * *'  # Runs daily at 3:00 AM PST
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create TP Blend
+        run: python runBlend.py 2OuOuEoK0ltih8CWYpFmqV 2XJ4ajZJXPRtjk6Fqdrdnv 45OVr8y5w8vUdE3y8Q134w
