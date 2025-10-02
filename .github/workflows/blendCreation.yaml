@@ -8,6 +8,11 @@ on:
 jobs:
   run-script:
     runs-on: ubuntu-latest
+    env:
+      SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+      SPOTIFY_SECRET: ${{ secrets.SPOTIFY_SECRET }}
+      SPOTIFY_REDIRECT: ${{ secrets.SPOTIFY_REDIRECT }}
+      SPOTIFY_REFRESH: ${{ secrets.SPOTIFY_REFRESH }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
