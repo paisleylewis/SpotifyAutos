@@ -1,6 +1,7 @@
 import tekore as tk
 import os
 from dotenv import load_dotenv
+from collections import Counter
 
 def authorize():
     # Load .env only if running locally
@@ -25,3 +26,12 @@ def getPlaylistTracks(spotify, playlistId):
             fullsongsdetails.append(track)
         offset += 100
     return fullsongsdetails
+
+def getinfo(track):
+    return (track.track.name, track.track.artists[0].name)
+
+
+def dupcheck(playlists):
+    playlists = [getinfo(item) for sublist in playlists for item in sublist]
+    counter = Counter(playlists)
+    return [item for item, count in counter.items() if count > 1]

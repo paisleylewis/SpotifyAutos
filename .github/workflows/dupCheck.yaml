@@ -1,0 +1,31 @@
+name: Check for duplicates
+
+on:
+  workflow_dispatch:
+    inputs:
+      playlistIds:
+        description: 'Playlist Ids to check for duplicates'
+        required: true
+        default: '45OVr8y5w8vUdE3y8Q134w'
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    env:
+      SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+      SPOTIFY_SECRET: ${{ secrets.SPOTIFY_SECRET }}
+      SPOTIFY_REDIRECT: ${{ secrets.SPOTIFY_REDIRECT }}
+      SPOTIFY_REFRESH: ${{ secrets.SPOTIFY_REFRESH }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: DupCheck
+        run: python runDupCheck.py ${{ github.event.inputs.playlistIds }}
