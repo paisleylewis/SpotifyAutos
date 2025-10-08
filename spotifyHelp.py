@@ -19,12 +19,9 @@ def authorize():
 def getPlaylistTracks(spotify, playlistId):
     offset = 0
     fullsongsdetails = []
-    cur = 0
-    while len(fullsongsdetails) == cur*100:
-        myplaylist2 = spotify.playlist_items(playlistId,offset=offset)
-        tracks2 = myplaylist2.items
-        for track in tracks2:
+    while len(fullsongsdetails) == offset:
+        tracks = spotify.playlist_items(playlistId,offset=offset).items
+        for track in tracks:
             fullsongsdetails.append(track)
-        cur+=1    
         offset += 100
     return fullsongsdetails
